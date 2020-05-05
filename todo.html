@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>super todo</title>'
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans|Source+Sans+Pro|Supermercado+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+    <nav class="top-bar">
+        <div class="img" img></div>
+        <div class="logo std-width">Super Todo!</div>
+    </nav>
+    <section class="main std-width">
+        <h1>My ToDo's</h1>
+        <hr/>
+        <div class="todo-container">
+            <div class="todo">
+                <label class="container">One
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="todo">
+                <label class="container">One
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="todo">
+                <label class="container">One
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+        </div>
+        <div class="add-todo">
+            <input type="text" name="" id="" class="add-todo-input" placeholder="Add Todo">
+            <button class="add-todo-button" onclick="addTodo()">Add</button>
+        </div>
+    </section>
+    <script>
+
+         var todos = [];
+         if(localStorage.getItem('todos') !=""){
+            todos = localStorage.getItem('todos').split(',');
+
+         }
+         
+            
+
+         function addTodo() {
+             
+             var taskToBeAdded = document.querySelector('.add-todo-input').value
+             todos.push(taskToBeAdded)
+             displayTodo()
+             document.querySelector('.add-todo-input').value=''
+             localStorage.setItem('todos',todos)
+
+         }
+         function displayTodo(){
+             
+             var todoContainer = document.querySelector('.todo-container')
+             todoContainer.innerHTML = ''
+            for(var i = 0; i < todos.length ; i++ ) {
+                todoContainer.innerHTML += `
+             <div class="todo">
+                <label class="container">${todos[i]}
+                    <input type="checkbox" onchange="deleteTodo(${i})" >
+                    <span class="checkmark"></span>
+                  </label>
+            </div>`
+
+            }
+        
+         }
+         function deleteTodo(index){
+             console.log('Delete a todo',index)
+             todos.splice(index,1)
+             displayTodo()
+             localStorage.setItem('todos',todos)
+         }
+
+         displayTodo()
+
+
+    </script>
+</body>
+</html>
