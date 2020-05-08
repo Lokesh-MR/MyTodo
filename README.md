@@ -1,2 +1,2 @@
 # MyTodo
-todo
+Simple Daily Activity Trackink Webapp
